@@ -1,0 +1,771 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>KAYN ANDAMIOS PRO</title><link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icons/icon-192.png"><meta name="theme-color" content="#f5c400">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><style>
+:root{--yellow:#f5c400;--black:#080808;--red:#c40000;--blue:#1475ff}*{box-sizing:border-box}html,body{overscroll-behavior-y:none;overscroll-behavior-x:none;touch-action:pan-x pan-y}body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#f7f7f7,#ececec);color:#111;min-height:100%;overflow-x:hidden}#splash{position:fixed;inset:0;background:#050505;z-index:99;display:flex;align-items:center;justify-content:center;flex-direction:column;color:white}#splash img{width:190px;max-width:75%;animation:pulse 1s ease-in-out infinite alternate}#splash h1{color:var(--yellow);letter-spacing:1px}@keyframes pulse{from{transform:scale(1);filter:drop-shadow(0 0 0 #f5c400)}to{transform:scale(1.06);filter:drop-shadow(0 0 18px #f5c400)}}header{position:sticky;top:0;z-index:10;background:linear-gradient(135deg,#050505,#1b1b1b);color:white;padding:13px 14px;box-shadow:0 8px 24px #0004;border-bottom:1px solid #2a2a2a}.head{display:flex;gap:10px;align-items:center}.head img{width:48px;height:48px;object-fit:contain}.head h1{margin:0;color:var(--yellow);font-size:20px}.head p{margin:2px 0 0;font-size:12px;color:#ddd}nav{display:flex;gap:8px;overflow:auto;background:#111;padding:10px 9px;box-shadow:inset 0 -1px 0 #333}nav button{white-space:nowrap;background:#222;color:white;border:1px solid #333;border-radius:999px;padding:10px 13px;font-weight:bold;box-shadow:0 2px 8px #0002;transition:.18s transform,.18s background}nav button.active{background:linear-gradient(135deg,var(--yellow),#ffe16a);color:#000;transform:translateY(-1px)}main{max-width:1180px;margin:auto;padding:12px}.tab{display:none}.tab.active{display:block}.card{background:rgba(255,255,255,.97);border:1px solid #e7e7e7;border-radius:24px;padding:16px;margin-bottom:14px;box-shadow:0 12px 36px #00000014;backdrop-filter:blur(8px)}.heroCard{background:linear-gradient(135deg,#050505,#262626);color:white;border:0;position:relative;overflow:hidden}.heroCard h2{color:#f5c400}.proTable th{background:#111!important;color:#f5c400}.proTable td,.proTable th{padding:10px;border-bottom:1px solid #eee}.catRow td{background:#fff5cf;font-weight:bold;color:#755000}.totalRow td{background:#111;color:#f5c400;font-weight:bold}.counterCanvas{width:100%;max-width:760px;border-radius:18px;border:1px solid #ddd;background:#fff}.resultBox{background:#111;color:#f5c400;border-radius:18px;padding:14px;font-size:18px;font-weight:bold}.stockGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.stockCard{border:1px solid #e6e6e6;background:#fff;border-radius:18px;padding:12px;box-shadow:0 4px 18px #0000000c}.stockCard h3{margin:0 0 8px;font-size:15px}.qtyControls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.qtyControls button{min-width:42px}.qtyNumber{font-size:26px;font-weight:900;color:#111;background:#fff5cf;border-radius:14px;padding:8px 14px}.tagAuto{background:#e7f0ff;color:#1454ad;border:1px solid #bcd4ff}.tagWarn{background:#fff2d6;color:#8a5a00;border:1px solid #ffd37a}@media(max-width:650px){.stockGrid{grid-template-columns:1fr}}h2{font-size:18px;margin:0 0 12px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}label{display:block;font-size:12px;color:#555;margin-bottom:4px}input,select,textarea{width:100%;padding:12px;border:1px solid #d4d4d4;border-radius:15px;font-size:16px;background:#fff;box-shadow:inset 0 1px 0 #fff;outline:none}input:focus,select:focus,textarea:focus{border-color:#f5c400;box-shadow:0 0 0 3px #f5c40033}textarea{min-height:70px}button{border:0;border-radius:15px;padding:12px 14px;background:linear-gradient(135deg,#111,#2a2a2a);color:white;font-weight:bold;box-shadow:0 4px 14px #0002;transition:.15s transform}button:active{transform:scale(.98)}.easy{background:#fff9df;border:2px solid #f5c400}.sectionTitle{display:flex;align-items:center;justify-content:space-between;gap:8px}.bigToggle{display:flex;align-items:center;gap:10px;background:#f7f7f7;border:1px solid #ddd;border-radius:14px;padding:12px;font-size:15px}.bigToggle input{width:auto;transform:scale(1.2)}.orange{background:#fff2d6;color:#8a5a00;border:1px solid #ffd37a}button.yellow{background:linear-gradient(135deg,var(--yellow),#ffdf57);color:#000}button.light{background:#eee;color:#111}button.red{background:#b00000}.row{display:flex;gap:8px;flex-wrap:wrap}.metric{background:#fafafa;border:1px solid #eee;border-radius:14px;padding:10px}.metric b{font-size:18px}table{width:100%;border-collapse:collapse;font-size:13px}td,th{border-bottom:1px solid #eee;padding:8px;text-align:left}th{background:#fafafa}#planBox{overflow:hidden;background:#fff;border:1px solid #ddd;border-radius:20px;position:relative;touch-action:none;box-shadow:0 8px 28px #0001}.note{font-size:12px;color:#666}.legend{display:flex;gap:8px;flex-wrap:wrap;font-size:12px;margin-top:8px}.leg{display:inline-flex;align-items:center;gap:5px;background:#f6f6f6;border:1px solid #ddd;border-radius:999px;padding:5px 8px}.sw{width:22px;height:4px;display:inline-block;background:#111}.sw.blue{background:#1475ff}.sw.red{background:#c40000}.sw.yellow{background:#f5c400}.sw.gray{background:#888}.pill{display:inline-block;background:#eee;border-radius:999px;padding:5px 9px;margin:3px;font-size:12px}canvas,svg{max-width:none;background:white;transform-origin:0 0}.viewportHint{font-size:12px;color:#555;margin-top:8px}.viewControls{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.zoomBadge{position:absolute;right:10px;top:10px;background:#111;color:#f5c400;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:bold;z-index:3}.photos{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.photos img{width:100%;height:140px;object-fit:cover;border-radius:12px;border:1px solid #ddd}@media(max-width:650px){.grid,.grid3{grid-template-columns:1fr}main{padding:10px}}@media print{header,nav,.noPrint,button{display:none!important}body{background:white}.card{box-shadow:none;border:0}}
+</style></head><body><div id="splash">
+  <div class="splashLogo">
+    <img src="icons/logo.png" alt="KAYN ANDAMIOS">
+    <div class="animRule"></div>
+    <div class="animScaffold">
+      <span></span><span></span><span></span><span></span>
+      <i></i><i></i>
+    </div>
+  </div>
+  <h1>KAYN ANDAMIOS</h1>
+  <p>Medidor PRO de montaje</p>
+</div><header><div class="head"><img src="icons/logo.png"><div><h1>KAYN ANDAMIOS</h1><p>Plano · despiece · pedido · obras</p></div></div></header><nav class="noPrint"><button class="active" onclick="tab('obra',this)">Obra</button><button onclick="tab('plano',this)">Plano</button><button onclick="tab('despiece',this)">Despiece</button><button onclick="tab('pedido',this)">Pedido</button><button onclick="tab('fotos',this)">Fotos</button><button onclick="tab('contabilidad',this)">Contabilidad</button><button onclick="tab('guardar',this)">Guardar</button><button onclick="tab('informe',this)">Informe/PDF</button></nav><main>
+<section id="obra" class="tab active">
+ <div class="card heroCard">
+  <h2>Resumen PRO</h2>
+  <p style="margin:0;color:#ddd">Plano, despiece, pedido profesional y conteo por foto en una sola app.</p>
+  <div class="row" style="margin-top:12px">
+    <button class="yellow" onclick="safeCalc();tab('plano',document.querySelector('nav button:nth-child(2)'))">Calcular y ver plano</button>
+    <button class="light" onclick="tab('pedido',document.querySelector('nav button:nth-child(4)'))">Ver pedido</button>
+  </div>
+ </div><div class="card"><h2>Datos</h2><div class="grid"><div><label>Obra</label><input id="obraNombre" placeholder="Nombre de obra"></div><div><label>Cliente</label><input id="cliente" placeholder="Cliente"></div><div><label>Dirección</label><input id="direccion" placeholder="Dirección"></div><div><label>Sistema</label><select id="sistema" onchange="calc()"><option value="europeo">Andamio europeo</option><option value="ulma">Multidireccional ULMA</option></select></div></div></div><div class="card"><h2>Medidas</h2><div class="grid3"><div><label>Largo A / fachada principal (m)</label><input id="largoA" type="number" step="0.01" value="12"></div><div><label>Largo B / esquina (m)</label><input id="largoB" type="number" step="0.01" value="0"></div><div><label>Altura (m)</label><input id="alto" type="number" step="0.01" value="8"></div><div><label>Ancho andamio (m)</label><input id="anchoAndamio" type="number" step="0.01" value="0.70"></div><div><label>Altura nivel (m)</label><input id="altoNivel" type="number" step="0.01" value="2"></div><div><label>Precio €/m²</label><input id="precio" type="number" step="0.01" value="0"></div></div><h2 style="margin-top:14px">Módulos disponibles</h2><div class="grid3"><label><input type="checkbox" class="medida" value="3.00" checked> 3,00 m</label><label><input type="checkbox" class="medida" value="2.50" checked> 2,50 m</label><label><input type="checkbox" class="medida" value="2.00" checked> 2,00 m</label><label><input type="checkbox" class="medida" value="1.50" checked> 1,50 m</label><label><input type="checkbox" class="medida" value="1.00" checked> 1,00 m</label><label><input type="checkbox" class="medida" value="0.70" checked> 0,70 m</label></div></div>
+<div class="card"><h2>Opciones montaje</h2><div class="grid"><label><input id="esquinaL" type="checkbox" onchange="calc()"> Andamio en esquina L</label><label><input id="doble" type="checkbox" onchange="calc()"> Andamio doble / doble ancho junto</label><label><input id="torreCarga" type="checkbox" onchange="calc()"> Torre de carga ULMA estándar</label><label><input id="medioArranque" type="checkbox" onchange="calc()"> Medio marco 1 m / vertical 1 m</label><label><input id="malla" type="checkbox" onchange="calc()"> Malla</label><label><input id="rodapies" type="checkbox" checked onchange="calc()"> Rodapiés</label><label><input id="barrasInterior" type="checkbox" checked onchange="calc()"> Barras interiores</label><label><input id="cierresLaterales" type="checkbox" checked onchange="calc()"> Cierres laterales</label></div><div class="grid3" style="margin-top:12px"><div><label>Marcos de paso</label><select id="marcosPaso" onchange="calc()"><option value="no">No</option><option value="si">Sí</option></select></div><div><label>Cantidad marcos/módulos paso</label><input id="marcosPasoCant" type="number" value="0" placeholder="0 = todo"></div><div><label>Altura libre necesaria (m)</label><input id="alturaLibreNecesaria" type="number" step="0.01" value="2.20"></div><div><label>Husillo regulado (m)</label><input id="alturaHusillo" type="number" step="0.01" value="0.30"></div><div><label>Verticales ULMA</label><select id="verticalMode" onchange="calc()"><option value="auto">Automático</option><option value="manual">Manual</option></select></div><div><label>Acceso lado</label><select id="accesoLado"><option value="A">Tramo A</option><option value="B">Tramo B</option></select></div>
+   <div><label>Acceso módulo Nº</label><input id="accesoModulo" type="number" value="1"></div>
+   <div><label>Tipo acceso</label><select id="tipoAcceso"><option value="escalera">Escalera + plataforma</option><option value="torre">Torre de acceso</option></select></div><div><label>Vert. ULMA 0,50 manual</label><input id="v050" type="number" value="0"></div><div><label>Vert. ULMA 1,00 manual</label><input id="v100" type="number" value="0"></div><div><label>Vert. ULMA 1,50 manual</label><input id="v150" type="number" value="0"></div><div><label>Vert. ULMA 2,00 manual</label><input id="v200" type="number" value="0"></div><div><label>Vert. ULMA 3,00 manual</label><input id="v300" type="number" value="0"></div><div><label>Hueco esquina opcional (m)</label><input id="huecoEsquina" type="number" step="0.01" value="0"></div></div></div>
+<div class="card"><h2>Ménsulas por módulo</h2><div class="grid3"><div><label>Lado</label><select id="mensulaLado"><option value="A">Tramo A</option><option value="B">Tramo B</option></select></div><div><label>Módulo Nº o “todo”</label><input id="mensulaModulo" placeholder="1, 2, 3 o todo" value="1"></div><div><label>Medida</label><select id="mensulaMedida"><option value="0.30">0,30 m</option><option value="0.50">0,50 m</option><option value="0.70">0,70 m</option><option value="1.00">1,00 m</option><option value="1.50">1,50 m</option><option value="2.00">2,00 m</option><option value="2.50">2,50 m</option><option value="3.00">3,00 m</option></select></div><div><label>Niveles</label><select id="mensulaNiveles"><option value="todos">Todos</option><option value="superior">Solo arriba</option><option value="manual">Cantidad manual</option></select></div><div><label>Cantidad manual</label><input id="mensulaCantidad" type="number" value="0"></div></div><div class="row" style="margin-top:10px"><button class="light" onclick="addMensula()">Añadir ménsula</button><button class="red" onclick="mensulas=[];calc()">Borrar ménsulas</button></div><div id="mensulaList" class="note" style="margin-top:8px"></div></div>
+<div class="card"><h2>Accesorios manuales</h2><div class="grid3"><div><label>Amarres manuales</label><input id="amarresManual" type="number" value="0"></div><div><label>Abrazaderas giratorias</label><input id="abrazGiratorias" type="number" value="0"></div><div><label>Abrazaderas fijas extra</label><input id="abrazFijasExtra" type="number" value="0"></div><div><label>Tubos lisos 0,50 m</label><input id="tubo050" type="number" value="0"></div><div><label>Tubos lisos 1,00 m</label><input id="tubo100" type="number" value="0"></div><div><label>Puentes barandilla</label><input id="puentesBarandilla" type="number" value="0"></div><div><label>Niveladores marco europeo</label><input id="niveladores" type="number" value="0"></div><div><label>Adaptadores espiga extra</label><input id="adaptadoresExtra" type="number" value="0"></div></div><label style="margin-top:10px">Observaciones</label><textarea id="obs" placeholder="Notas de obra"></textarea><div class="row" style="margin-top:12px"><button class="yellow" onclick="safeCalc()">Calcular / actualizar</button></div><div id="errorBox" class="note" style="color:#b00000;margin-top:8px"></div></div><div class="card"><h2>Resultado rápido</h2><div id="resumen" class="grid"></div></div></section>
+<section id="plano" class="tab"><div class="card noPrint"><h2>Plano de montaje</h2><div class="row"><button class="yellow" onclick="draw2D()">Plano 2D detallado</button><button onclick="draw3D()">3D girable</button><button onclick="drawRealista()">Vista realista</button><button class="light" onclick="resetView()">Centrar / reset zoom</button><button class="light" onclick="downloadSVG()">Descargar SVG</button></div>
+  <div class="viewControls">
+    <button class="light" onclick="zoomBy(1.2)">Zoom +</button>
+    <button class="light" onclick="zoomBy(0.85)">Zoom -</button>
+    <span class="pill">2D: arrastra para mover · pinza para zoom</span>
+    <span class="pill">3D: arrastra para girar · pinza para zoom</span>
+  </div><p class="note">Plano orientativo. No sustituye proyecto técnico ni manual del fabricante.</p></div><div id="planBox" style="min-height:520px"><div id="zoomBadge" class="zoomBadge">100%</div><svg id="svg" width="1000" height="720"></svg><canvas id="canvas3d" width="1000" height="720" style="display:none"></canvas><canvas id="canvasReal" width="1000" height="720" style="display:none"></canvas></div><p class="viewportHint">Consejo: en plano 2D puedes arrastrar para mover y pellizcar para acercar. En 3D, arrastra para girar y pellizca para acercar.</p></section><section id="despiece" class="tab"><div class="card"><h2>Despiece</h2><div id="despieceBox"></div></div></section><section id="pedido" class="tab"><div class="card"><h2>Hoja de pedido</h2><div class="row noPrint"><button class="yellow" onclick="downloadCSV()">Exportar pedido CSV</button><button class="light" onclick="exportPedidoExcel()">Exportar pedido Excel</button><button class="light" onclick="printPedido()">Imprimir / PDF pedido</button></div><div id="pedidoBox"></div></div></section><section id="fotos" class="tab"><div class="card"><h2>Fotos de obra</h2><input id="fotoInput" type="file" accept="image/*" multiple onchange="addPhotos(event)"><div class="row"><button class="light" onclick="document.getElementById('fotoInput').click()">Añadir fotos</button><button class="red" onclick="photos=[];renderPhotos()">Borrar fotos</button></div><div id="photos" class="photos"></div></div>
+<div class="card">
+ <h2>Conteo automático por foto <span class="pill">beta</span></h2>
+ <p class="note">Sube una foto clara con piezas separadas. La app estima piezas por contraste/bordes. Úsalo como ayuda y revisa el resultado visual.</p>
+ <div class="grid3">
+   <div><label>Tipo de pieza</label><select id="counterPiece"><option>Largueros</option><option>Rodapiés</option><option>Chapas / plataformas</option><option>Husillos</option><option>Marcos</option><option>Diagonales</option></select></div>
+   <div><label>Sensibilidad</label><input id="counterSensitivity" type="range" min="10" max="80" value="38"></div>
+   <div><label>Mínimo tamaño pieza</label><input id="counterMinSize" type="range" min="20" max="300" value="85"></div>
+ </div>
+ <input id="counterInput" type="file" accept="image/*" onchange="loadCounterPhoto(event)">
+ <div class="row" style="margin-top:10px">
+   <button class="yellow" onclick="runPhotoCounter()">Contar automáticamente</button>
+   <button class="light" onclick="addCounterToDespiece()">Añadir al despiece</button>
+ </div>
+ <canvas id="counterCanvas" class="counterCanvas" width="900" height="600"></canvas>
+ <div id="counterResult" class="resultBox">Resultado: 0 piezas</div>
+</div></section>
+
+
+<section id="contabilidad" class="tab">
+ <div class="card heroCard">
+  <h2>Contabilidad asistida de material</h2>
+  <p style="margin:0;color:#ddd">La foto propone una cantidad; tú corriges con +/− y queda guardado en inventario real.</p>
+ </div>
+ <div class="card">
+  <h2>Clasificar foto / paquete</h2>
+  <div class="grid3">
+    <div><label>Sistema</label><select id="stockSistema"><option value="Europeo">Europeo</option><option value="ULMA">ULMA</option></select></div>
+    <div><label>Material</label><select id="stockMaterial" onchange="updateStockMeasures()">
+      <option value="Plataforma escalera">Plataforma escalera</option>
+      <option value="Plataforma normal">Plataforma normal</option>
+      <option value="Rodapié">Rodapié</option>
+      <option value="Barra / larguero">Barra / larguero</option>
+      <option value="Medio marco">Medio marco</option>
+      <option value="Marco europeo">Marco europeo</option>
+      <option value="Diagonal">Diagonal</option>
+      <option value="Husillo">Husillo</option>
+      <option value="Vertical ULMA">Vertical ULMA</option>
+      <option value="Horizontal ULMA">Horizontal ULMA</option>
+      <option value="Ménsula">Ménsula</option>
+    </select></div>
+    <div><label>Medida</label><select id="stockMedida"></select></div>
+  </div>
+  <div class="grid3" style="margin-top:10px">
+    <div><label>Conteo asistido final</label><input id="stockCantidad" type="number" value="0"></div>
+    <div><label>Obra / almacén</label><input id="stockUbicacion" placeholder="Almacén, obra..."></div>
+    <div><label>Nota</label><input id="stockNota" placeholder="Paquete, zona, foto..."></div>
+  </div>
+  <div class="row" style="margin-top:10px">
+    <button class="yellow" onclick="document.getElementById('stockPhotoInput').click()">Subir foto y contar</button>
+    <button class="light" onclick="stockAdjust(1)">+1</button>
+    <button class="light" onclick="stockAdjust(-1)">−1</button>
+    <button class="yellow" onclick="saveStockItem()">Guardar en inventario</button>
+  </div>
+  <input id="stockPhotoInput" type="file" accept="image/*" onchange="loadStockPhoto(event)" style="display:none">
+  <div class="qtyControls" style="margin-top:12px">
+    <span class="pill tagAuto">IA asistida</span>
+    <span class="qtyNumber" id="stockQtyView">0</span>
+    <span class="pill tagWarn">Revisar visualmente antes de guardar</span>
+  </div>
+  <canvas id="stockCanvas" class="counterCanvas" width="900" height="600"></canvas>
+  <p class="note" id="stockTip">Consejo: para rodapiés ignora plataformas laterales; para plataformas separa plataforma normal y plataforma de escalera.</p>
+ </div>
+ <div class="card">
+  <h2>Inventario guardado</h2>
+  <div class="row noPrint">
+    <button class="light" onclick="exportStockCSV()">Exportar inventario CSV</button>
+    <button class="light" onclick="addStockToDespiece()">Añadir inventario al despiece</button>
+    <button class="red" onclick="if(confirm('¿Borrar inventario?')){stockItems=[];renderStockTable();}">Borrar inventario</button>
+  </div>
+  <div id="stockTable"></div>
+ </div>
+</section>
+
+<section id="guardar" class="tab"><div class="card"><h2>Guardar obras</h2><div class="row"><button class="yellow" onclick="saveWork()">Guardar obra</button><button class="light" onclick="newWork()">Nueva obra</button></div><div id="saved"></div></div></section><section id="informe" class="tab"><div class="card"><h2>Informe / PDF</h2><div class="row noPrint"><button class="yellow" onclick="printPDF()">Crear PDF</button><button class="light" onclick="copyReport()">Copiar informe</button></div><div id="report"></div></div></section>
+</main><script>
+setTimeout(()=>{$('splash').style.display='none'},1200);if('serviceWorker' in navigator){navigator.serviceWorker.register('./service-worker.js')}const $=id=>document.getElementById(id); const num=id=>{let e=$(id); return e?parseFloat(e.value||0):0}; const int=id=>{let e=$(id); return e?parseInt(e.value||0):0};
+
+// Helpers seguros para evitar que un campo roto bloquee el botón Calcular
+function safeEl(id){return document.getElementById(id)}
+function safeVal(id, def=''){let e=safeEl(id); return e ? e.value : def}
+function safeNum(id, def=0){let v=parseFloat(safeVal(id, def)); return isNaN(v)?def:v}
+function safeInt(id, def=0){let v=parseInt(safeVal(id, def)); return isNaN(v)?def:v}
+function safeChecked(id){let e=safeEl(id); return !!(e && e.checked)}
+
+let viewMode='2d';
+let panX=0, panY=0, zoom=1;
+let activePointers=new Map();
+let lastPinchDist=null;
+let lastDragPoint=null;
+function activeViewEl(){
+  if(viewMode==='3d') return $('canvas3d');
+  if(viewMode==='real') return $('canvasReal');
+  return $('svg');
+}
+function applyView(){
+  const el=activeViewEl();
+  ['svg','canvas3d','canvasReal'].forEach(id=>{
+    const e=$(id); if(e) e.style.transform='';
+  });
+  if(el){
+    el.style.transform=`translate(${panX}px, ${panY}px) scale(${zoom})`;
+  }
+  const b=$('zoomBadge'); if(b)b.textContent=Math.round(zoom*100)+'%';
+}
+function resetView(){
+  panX=0; panY=0; zoom=1; rx=-.45; ry=.65; applyView();
+  if(viewMode==='3d') render3D(false);
+  if(viewMode==='real') render3D(true);
+}
+function zoomBy(factor, cx=500, cy=360){
+  const old=zoom;
+  zoom=Math.max(.35,Math.min(4,zoom*factor));
+  const k=zoom/old;
+  panX=cx-(cx-panX)*k;
+  panY=cy-(cy-panY)*k;
+  applyView();
+}
+function dist(a,b){return Math.hypot(a.x-b.x,a.y-b.y)}
+function setupViewportGestures(){
+ const box=$('planBox'); if(!box || box.dataset.gestures==='1')return; box.dataset.gestures='1';
+ box.addEventListener('pointerdown',e=>{
+   box.setPointerCapture?.(e.pointerId);
+   activePointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+   if(activePointers.size===1) lastDragPoint={x:e.clientX,y:e.clientY};
+   if(activePointers.size===2){
+     const pts=[...activePointers.values()];
+     lastPinchDist=dist(pts[0],pts[1]);
+   }
+ });
+ box.addEventListener('pointermove',e=>{
+   if(!activePointers.has(e.pointerId))return;
+   const prev=activePointers.get(e.pointerId);
+   activePointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+   if(activePointers.size===2){
+     const pts=[...activePointers.values()];
+     const d=dist(pts[0],pts[1]);
+     if(lastPinchDist){
+       const rect=box.getBoundingClientRect();
+       zoomBy(d/lastPinchDist, ((pts[0].x+pts[1].x)/2)-rect.left, ((pts[0].y+pts[1].y)/2)-rect.top);
+     }
+     lastPinchDist=d;
+     return;
+   }
+   if(activePointers.size===1 && lastDragPoint){
+     const dx=e.clientX-lastDragPoint.x, dy=e.clientY-lastDragPoint.y;
+     if(viewMode==='2d'){
+       panX+=dx; panY+=dy; applyView();
+     }else{
+       ry+=dx*.01; rx+=dy*.01; 
+       if(viewMode==='3d') render3D(false);
+       if(viewMode==='real') render3D(true);
+     }
+     lastDragPoint={x:e.clientX,y:e.clientY};
+   }
+ });
+ function end(e){activePointers.delete(e.pointerId); lastPinchDist=null; lastDragPoint=null;}
+ box.addEventListener('pointerup',end); box.addEventListener('pointercancel',end); box.addEventListener('pointerleave',end);
+ box.addEventListener('wheel',e=>{e.preventDefault(); zoomBy(e.deltaY<0?1.12:.9,e.offsetX,e.offsetY)}, {passive:false});
+}
+
+let mensulas=[], photos=[], countedPhotoPieces={}, stockItems=[], currentId=null, last={A:[],B:[],levels:0,breakdown:{},normalPlatforms:{},stairPlatforms:{},rodFront:{},rodLat:{},area:0,modCount:0};function tab(id,b){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active'); if(id==='plano')draw2D(); if(id==='despiece')renderBreakdown(); if(id==='pedido')renderPedido(); if(id==='informe')renderReport(); if(id==='guardar')renderSaved()}function measures(){return [...document.querySelectorAll('.medida:checked')].map(x=>parseFloat(x.value)).sort((a,b)=>b-a)}function compose(L){let ms=measures(), rem=L, arr=[]; for(let m of ms){while(rem+0.001>=m){arr.push(m); rem-=m}} if(rem>0.05){let m=[...ms].reverse().find(v=>v>=rem)||ms[ms.length-1]||1; arr.push(m)} return arr}function addItem(o,k,q){q=Math.ceil(Number(q)||0); if(q>0)o[k]=(o[k]||0)+q}function countBy(arr){let o={}; arr.forEach(x=>{let k=Number(x).toFixed(2)+' m'; o[k]=(o[k]||0)+1}); return o}function addMensula(){mensulas.push({lado:$('mensulaLado').value, modulo:$('mensulaModulo').value.trim()||'1', medida:num('mensulaMedida'), niveles:$('mensulaNiveles').value, cantidad:int('mensulaCantidad')}); calc()}function mensulaQty(m,levels,modCount){let mods=m.modulo.toLowerCase()==='todo'?modCount:1; if(m.niveles==='manual')return Math.max(0,m.cantidad); if(m.niveles==='superior')return mods; return mods*levels}function renderMensulas(){let box=$('mensulaList'); if(!mensulas.length){box.innerHTML='Sin ménsulas.'; return} box.innerHTML=mensulas.map((m,i)=>`<span class="pill">${m.lado} · mód. ${m.modulo} · ${m.medida.toFixed(2)}m · ${m.niveles} <button class="light" style="padding:2px 6px" onclick="mensulas.splice(${i},1);calc()">x</button></span>`).join('')}
+
+function safeCalc(){
+  try{
+    const eb=document.getElementById('errorBox');
+    if(eb) eb.textContent='';
+    calc();
+  }catch(err){
+    console.error(err);
+    const eb=document.getElementById('errorBox');
+    if(eb) eb.textContent='Error al calcular: '+err.message;
+    alert('Hay un error al calcular: '+err.message);
+  }
+}
+
+function addDiagonalsByMeasure(b, mods, levels, prefix){
+  mods.forEach((m,i)=>{
+    let q = (i%3===0 || (i+1)==safeInt('accesoModulo',1)) ? levels : 0;
+    if(q>0) addItem(b, `${prefix} ${m.toFixed(2)} m`, q);
+  });
+}
+
+function calc(){let A=compose(num('largoA')), useB=$('esquinaL').checked && num('largoB')>0, B=useB?compose(num('largoB')):[], levels=Math.max(1,Math.ceil(num('alto')/(safeNum('altoNivel',2)||2))), sys=$('sistema').value;let modCount=A.length+B.length, b={}, acceso=Math.max(1,safeInt('accesoModulo',1)||1);let area=(num('largoA')+(useB?num('largoB'):0))*num('alto');addItem(b,'Husillos iguales', modCount*2+2);addItem(b,'Tablas / durmientes', modCount*2+2);let amarres=int('amarresManual')>0?int('amarresManual'):Math.ceil((num('largoA')+(useB?num('largoB'):0))/4)*Math.ceil(num('alto')/4);addItem(b,'Amarres', amarres); addItem(b,'Abrazaderas fijas', amarres+int('abrazFijasExtra'));
+ addItem(b,'Inicios para primeras diagonales', Math.max(2, Math.ceil(modCount/3)*2));if(sys==='europeo'){addItem(b,'Marcos europeos', (modCount+1)*levels);if($('medioArranque').checked){addItem(b,'Medio marcos 1 m', modCount+1);addItem(b,'Barra exterior para medio marco 1 m', modCount);}let barrasExt = modCount*levels*2;
+// Medio marco: primer nivel solo una barra exterior por módulo
+if($('medioArranque').checked){
+   barrasExt -= modCount;
+}
+// Marcos de paso: primer nivel lleva 2 exteriores igualmente (sin reducción)
+if($('marcosPaso').value==='si' && $('medioArranque').checked){
+   let ladoPaso=safeVal('marcosPasoLado','A');
+   let inicioPaso=Math.max(1,safeInt('marcosPasoInicio',1));
+   let qA=(ladoPaso==='A'||ladoPaso==='ambos')?Math.max(0,(safeInt('marcosPasoCant',0)>0?safeInt('marcosPasoCant',0):(A.length-inicioPaso+1))):0;
+   let qB=(ladoPaso==='B'||ladoPaso==='ambos')?Math.max(0,(safeInt('marcosPasoCant',0)>0?safeInt('marcosPasoCant',0):(B.length-inicioPaso+1))):0;
+   barrasExt += (qA+qB);
+}
+addItem(b,'Barandillas exteriores', barrasExt);if($('barrasInterior').checked){
+   let interiores = modCount*Math.max(0,levels-1)*2;
+   // Marcos de paso: en primer nivel también llevan 2 barras interiores
+   if($('marcosPaso').value==='si'){
+      let ladoPaso=safeVal('marcosPasoLado','A');
+      let inicioPaso=Math.max(1,safeInt('marcosPasoInicio',1));
+      let qA=(ladoPaso==='A'||ladoPaso==='ambos')?Math.max(0,(safeInt('marcosPasoCant',0)>0?safeInt('marcosPasoCant',0):(A.length-inicioPaso+1))):0;
+      let qB=(ladoPaso==='B'||ladoPaso==='ambos')?Math.max(0,(safeInt('marcosPasoCant',0)>0?safeInt('marcosPasoCant',0):(B.length-inicioPaso+1))):0;
+      interiores += (qA+qB)*2;
+   }
+   addItem(b,'Barras interiores', interiores);
+}addDiagonalsByMeasure(b, A.concat(B), levels, 'Diagonal europea');if($('cierresLaterales').checked)addItem(b,'Cierres laterales', levels*2);addItem(b,'Abrazaderas giratorias', int('abrazGiratorias'));addItem(b,'Tubos lisos 0,50 m', int('tubo050')); addItem(b,'Tubos lisos 1,00 m', int('tubo100'));addItem(b,'Puentes de barandilla', int('puentesBarandilla')); addItem(b,'Niveladores de altura marco europeo', int('niveladores'))} else {if($('verticalMode').value==='manual'){addItem(b,'Verticales ULMA 0,50 m',int('v050')); addItem(b,'Verticales ULMA 1,00 m',int('v100')); addItem(b,'Verticales ULMA 1,50 m',int('v150')); addItem(b,'Verticales ULMA 2,00 m',int('v200')); addItem(b,'Verticales ULMA 3,00 m',int('v300'))} else {addItem(b,'Verticales ULMA 2,00 m',(modCount+1)*(levels+1));if($('medioArranque').checked)addItem(b,'Verticales ULMA 1,00 m arranque',modCount+1)}let horizExt = modCount*(levels+1)*2;
+if($('medioArranque').checked){ horizExt -= modCount; }
+if($('marcosPaso').value==='si' && $('medioArranque').checked){
+   let ladoPaso=safeVal('marcosPasoLado','A');
+   let inicioPaso=Math.max(1,safeInt('marcosPasoInicio',1));
+   let qA=(ladoPaso==='A'||ladoPaso==='ambos')?Math.max(0,(safeInt('marcosPasoCant',0)>0?safeInt('marcosPasoCant',0):(A.length-inicioPaso+1))):0;
+   let qB=(ladoPaso==='B'||ladoPaso==='ambos')?Math.max(0,(safeInt('marcosPasoCant',0)>0?safeInt('marcosPasoCant',0):(B.length-inicioPaso+1))):0;
+   horizExt += (qA+qB);
+}
+addItem(b,'Horizontales exteriores ULMA',horizExt);if($('barrasInterior').checked)addItem(b,'Horizontales interiores ULMA',modCount*Math.max(0,levels-1)*2);addDiagonalsByMeasure(b, A.concat(B), levels, 'Diagonal ULMA');if($('torreCarga').checked){addItem(b,'Torre de carga ULMA estándar',1);addItem(b,'Vigas de carga ULMA',levels*2);addItem(b,'Verticales torre carga ULMA',4*(levels+1));addItem(b,'Horizontales torre carga ULMA',8*levels);addItem(b,'Plataformas torre de carga',levels)}}if($('marcosPaso').value==='si'){
+   let ladoPaso=safeVal('marcosPasoLado','A');
+   let inicioPaso=Math.max(1,safeInt('marcosPasoInicio',1)||1);
+   let qA = (ladoPaso==='A'||ladoPaso==='ambos') ? Math.max(0, (int('marcosPasoCant')>0?int('marcosPasoCant'):(A.length-inicioPaso+1))) : 0;
+   let qB = (ladoPaso==='B'||ladoPaso==='ambos') ? Math.max(0, (int('marcosPasoCant')>0?int('marcosPasoCant'):(B.length-inicioPaso+1))) : 0;
+   let q=qA+qB;
+   addItem(b,sys==='europeo'?'Marcos de paso':'Módulos de paso inferior ULMA',q);
+   addItem(b,'Adaptadores de espiga',q+int('adaptadoresExtra'));
+ } else addItem(b,'Adaptadores de espiga extra',int('adaptadoresExtra'));if($('doble').checked)addItem(b,sys==='ulma'?'Kit doble ancho ULMA':'Kit andamio doble europeo',modCount*levels);if(useB)addItem(b,'Piezas unión esquina L',levels*2);if($('malla').checked)addItem(b,'Malla aproximada m²',area);mensulas.forEach(m=>{let mc=m.lado==='A'?A.length:B.length; addItem(b,'Ménsulas '+m.medida.toFixed(2)+' m', mensulaQty(m,levels,mc))});let allMods=A.concat(B), normal={}, stair={}; allMods.forEach((m,i)=>{let k=m.toFixed(2)+' m'; normal[k]=(normal[k]||0)+levels; if(i+1===acceso){stair[k]=(stair[k]||0)+levels; normal[k]=Math.max(0,normal[k]-levels)}});if(allMods[acceso-1]){let ak=allMods[acceso-1].toFixed(2)+' m'; normal[ak]=(normal[ak]||0)+2;} // plataformas normales extra de la medida del módulo de acceso en primer nivel
+ let rodFront=countBy(allMods.flatMap(m=>Array(levels).fill(m))), rodLat={}; rodLat[(num('anchoAndamio')||0.7).toFixed(2)+' m']=levels*2*(useB?2:1);last={A,B,levels,breakdown:b,normalPlatforms:normal,stairPlatforms:stair,rodFront,rodLat,area,modCount};renderSummary(); renderMensulas(); renderBreakdown(); renderPedido(); renderReport(); draw2D()}
+function renderSummary(){let sys=$('sistema').value==='ulma'?'ULMA':'Europeo'; $('resumen').innerHTML=[['Sistema',sys],['Módulos',last.modCount],['Niveles',last.levels],['Superficie',last.area.toFixed(2)+' m²'],['Husillos',last.breakdown['Husillos iguales']||0],['Marcos paso',(last.breakdown['Marcos de paso']||last.breakdown['Módulos de paso inferior ULMA']||0)],['Presupuesto',(last.area*num('precio')).toFixed(2)+' €']].map(x=>`<div class="metric"><span>${x[0]}</span><br><b>${x[1]}</b></div>`).join('')}function table(o){let h='<table><tr><th>Pieza</th><th>Cantidad</th></tr>'; Object.entries(o||{}).forEach(([k,v])=>h+=`<tr><td>${k}</td><td>${v}</td></tr>`); return h+'</table>'}function unifiedDespieceRows(){
+ let rows=[];
+ const addCat=(name)=>rows.push({cat:name});
+ const addObj=(obj,prefix='')=>Object.entries(obj||{}).forEach(([k,v])=>rows.push({pieza:prefix+k,cantidad:v}));
+ addCat('Estructura y seguridad');
+ addObj(last.breakdown);
+ addCat('Plataformas / chapas normales');
+ addObj(last.normalPlatforms,'Plataforma ');
+ addCat('Plataformas de escalera / trampilla');
+ addObj(last.stairPlatforms,'Plataforma escalera ');
+ addCat('Rodapiés frontales');
+ addObj(last.rodFront,'Rodapié frontal ');
+ addCat('Rodapiés laterales');
+ addObj(last.rodLat,'Rodapié lateral ');
+ addCat('Conteo por foto añadido');
+ addObj(countedPhotoPieces);
+ return rows;
+}
+function renderBreakdown(){
+ const rows=unifiedDespieceRows();
+ let total=0;
+ let html='<table class="proTable"><tr><th>Pieza</th><th>Cantidad</th></tr>';
+ rows.forEach(r=>{
+   if(r.cat) html+=`<tr class="catRow"><td colspan="2">${r.cat}</td></tr>`;
+   else {total+=Number(r.cantidad)||0; html+=`<tr><td>${r.pieza}</td><td>${r.cantidad}</td></tr>`;}
+ });
+ html+=`<tr class="totalRow"><td>Total unidades orientativas</td><td>${total}</td></tr></table>`;
+ $('despieceBox').innerHTML=html;
+}
+
+function draw2D(){
+ viewMode='2d'; setupViewportGestures(); $('svg').style.display='block';$('canvas3d').style.display='none';$('canvasReal').style.display='none';
+ let svg=$('svg'), W=1000,H=720; svg.innerHTML='';
+ let baseY=520, baseX=95, scale=42, levelH=48, sys=$('sistema').value;
+ let accessSide=safeVal('accesoLado','A');
+ let accessMod=Math.max(1,safeInt('accesoModulo',1)||1);
+ let accessType=safeVal('tipoAcceso','escalera');
+ const line=(x1,y1,x2,y2,c='#111',w=2,d='')=>svg.insertAdjacentHTML('beforeend',`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="${w}" ${d}/>`); 
+ const rect=(x,y,w,h,fill='none',c='#111',sw=2,d='')=>svg.insertAdjacentHTML('beforeend',`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${fill}" stroke="${c}" stroke-width="${sw}" ${d}/>`); 
+ const text=(x,y,t,s=11,c='#111',anchor='middle')=>svg.insertAdjacentHTML('beforeend',`<text x="${x}" y="${y}" font-size="${s}" fill="${c}" text-anchor="${anchor}">${t}</text>`);
+ svg.insertAdjacentHTML('beforeend',`<defs><pattern id="stairs" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M0 8 L8 0" stroke="#1475ff" stroke-width="1"/></pattern></defs>`);
+ text(30,30,'KAYN ANDAMIOS - Plano de montaje detallado',18,'#111','start');
+ text(30,52,`Sistema: ${sys==='ulma'?'Multidireccional ULMA':'Europeo'} · módulos con medidas · barras · diagonales · acceso`,12,'#555','start');
+
+ function drawRun(mods,orient='H',x0=baseX,y0=baseY,label='A'){
+  let pos=0;
+  mods.forEach((m,i)=>{
+   let len=m*scale;
+   let x=orient==='H'?x0+pos:x0;
+   let y=orient==='H'?y0-last.levels*levelH:y0-pos-len;
+   let w=orient==='H'?len:46;
+   let h=orient==='H'?last.levels*levelH:len;
+   let isAccess=(label===accessSide && i+1===accessMod); let isPasoBase=isMarcoPasoVisible(label,i,mods.length);
+   rect(x,y,w,h,isPasoBase?'rgba(245,196,0,0.15)':(isAccess?'#eef6ff':'none'),isPasoBase?'#f5a400':(isAccess?'#1475ff':'#111'),isPasoBase?4:(isAccess?3:2)); if(isPasoBase){text(x+w/2,y+h-18,'PASO',12,'#9a6500');}
+   if($('doble').checked){
+     let off=orient==='H'?-42:42;
+     if(orient==='H')rect(x,y+off,w,h,'none','#777',1.5,'stroke-dasharray="6 4"');
+     else rect(x+off,y,w,h,'none','#777',1.5,'stroke-dasharray="6 4"');
+   }
+   for(let j=0;j<last.levels;j++){
+     let yy=y0-(j+1)*levelH;
+     if(orient==='H'){
+       // two bars/barandillas visibles per level
+       let isPasoBase = isMarcoPasoVisible(label,i,mods.length);
+       if(j===0){
+         if($('medioArranque').checked && !isPasoBase){
+           line(x,yy+levelH*0.32,x+w,yy+levelH*0.32,'#111',2.4);
+         } else {
+           line(x,yy+levelH*0.20,x+w,yy+levelH*0.20,'#111',2.2);
+           line(x,yy+levelH*0.44,x+w,yy+levelH*0.44,'#111',2.2);
+           if(isPasoBase){
+             line(x,yy+levelH*0.68,x+w,yy+levelH*0.68,'#555',2);
+             line(x,yy+levelH*0.88,x+w,yy+levelH*0.88,'#555',2);
+           }
+         }
+       } else {
+         line(x,yy+levelH*0.32,x+w,yy+levelH*0.32,'#111',1.6);
+         line(x,yy+levelH*0.62,x+w,yy+levelH*0.62,'#111',1.6);
+       }
+       // platform/chapa line
+       line(x,yy+levelH-3,x+w,yy+levelH-3, sys==='ulma'?'#f5c400':'#c40000',4);
+       // diagonal not everywhere: every 3 modules + access
+       
+       // access with stair and platform
+       if(isAccess){
+         rect(x+w*0.15, yy+levelH*0.10, w*0.70, levelH*0.80, 'url(#stairs)', '#1475ff', 2);
+         line(x+w*0.18,yy+levelH*0.85,x+w*0.82,yy+levelH*0.15,'#1475ff',2.5);
+         text(x+w/2,yy+levelH*0.52, accessType==='torre'?'TORRE':'ESC', 10, '#1475ff');
+       }
+     } else {
+       // vertical side B as plan in L
+       line(x+46*0.32, y+pos, x+46*0.32, y+pos, '#111', 1); 
+       // draw horizontal across width of vertical module
+       let y1=y, y2=y+h;
+       line(x+12,y1+i*0,x+12,y2,'#111',1.2);
+       line(x+30,y1,x+30,y2,'#111',1.2);
+       if(isAccess){
+         rect(x+5,y+len*0.15,36,len*0.70,'url(#stairs)','#1475ff',2);
+         line(x+6,y+len*0.85,x+40,y+len*0.15,'#1475ff',2.5);
+         text(x+23,y+len/2,'ESC',10,'#1475ff');
+       } else if(i%3===0) {
+         line(x,y+h,x+w,y,'#777',2);
+       }
+     }
+   }
+   if(orient==='H' && (isAccess || i%3===0)){ line(x+4,y0-4,x+w-4,y,'#777',3); } // DIAGONAL ORIGINAL FULL HEIGHT V9
+   if(orient==='H' && $('medioArranque').checked){ rect(x,y0-levelH*0.5,w,levelH*0.5,'rgba(245,196,0,0.10)','#9a6500'); line(x+4,y0-levelH*0.25,x+w-4,y0-levelH*0.25,'#9a6500',2.5); }
+   // module dimension labels
+   if(orient==='H'){
+     line(x,y0+8,x+w,y0+8,'#444',1,'stroke-dasharray="3 3"');
+     text(x+w/2,y0+24,`${label}${i+1} · ${m.toFixed(2)} m`,11,'#111');
+   } else {
+     line(x-10,y,x-10,y+h,'#444',1,'stroke-dasharray="3 3"');
+     text(x-34,y+h/2,`${label}${i+1}`,10,'#111','middle');
+     text(x+64,y+h/2,`${m.toFixed(2)} m`,10,'#111','start');
+   }
+   // mensulas by side/module
+   let list=mensulas.filter(mm=>mm.lado===label && (String(mm.modulo).toLowerCase()==='todo' || parseInt(mm.modulo)===i+1));
+   list.forEach(mm=>{
+     let levs=mm.niveles==='superior'?[last.levels]:[...Array(last.levels).keys()].map(v=>v+1);
+     if(mm.niveles==='manual')levs=[last.levels];
+     levs.forEach(j=>{
+       let out=mm.medida*35;
+       if(orient==='H'){
+         let yy=y0-(j-.5)*levelH;
+         line(x+w,yy,x+w+out,yy,'#f5c400',5);
+         line(x+w,yy+18,x+w+out,yy,'#b88700',3);
+         rect(x+w+out-5,yy-6,10,12,'#f5c400','#9a6500',1);
+       } else {
+         let xx=x+w+4, yy=y+h/2;
+         line(xx,yy,xx+out,yy,'#f5c400',5);
+         line(xx,yy+18,xx+out,yy,'#b88700',3);
+       }
+     });
+   });
+   pos+=len;
+  });
+ }
+
+ drawRun(last.A,'H',baseX,baseY,'A');
+ if($('esquinaL').checked && last.B.length)drawRun(last.B,'V',baseX-58,baseY,'B');
+ if($('torreCarga').checked && $('sistema').value==='ulma'){
+   let tx=baseX+last.A.reduce((s,m)=>s+m*scale,0)+42;
+   rect(tx,baseY-last.levels*levelH,76,last.levels*levelH,'none','#9a6500',3);
+   for(let j=0;j<last.levels;j++){
+     let yy=baseY-(j+1)*levelH;
+     line(tx,yy+10,tx+76,yy+10,'#9a6500',4);
+     line(tx,yy+levelH-10,tx+76,yy+levelH-10,'#9a6500',4);
+   }
+   text(tx+38,baseY-last.levels*levelH-8,'TORRE CARGA',12,'#9a6500');
+ }
+ // small legend in drawing
+ text(30,H-52,'Barras dobles por nivel · diagonales alternas · diagonal siempre en acceso · plataformas de escalera en azul',12,'#555','start');
+ text(30,H-32,'Rodapiés: rojo europeo / amarillo ULMA. Medidas de módulo indicadas bajo cada paño.',12,'#555','start');
+ drawVisibleDetailsOverlay();
+ applyView();
+}
+
+
+
+function isMarcoPasoVisible(label,idx,total){
+ if(!$('marcosPaso') || $('marcosPaso').value!=='si') return false;
+ let lado=$('marcosPasoLado') ? $('marcosPasoLado').value : 'A';
+ if(!(lado===label || lado==='ambos')) return false;
+ let inicio=Math.max(1,safeInt('marcosPasoInicio',1)||1);
+ let cant=int('marcosPasoCant')>0 ? int('marcosPasoCant') : Math.max(0,total-inicio+1);
+ return (idx+1)>=inicio && (idx+1)<inicio+cant;
+}
+function marcoPasoLabel(){
+ let libre=(safeNum('altoNivel',2)||2)-0.20;
+ let nec=safeNum('alturaLibreNecesaria',2.2)||2.2;
+ let ok=libre>=nec?'CUMPLE':(libre>=nec-0.10?'JUSTO':'NO CUMPLE');
+ return `${libre.toFixed(2)}m libre · ${ok}`;
+}
+
+function drawVisibleDetailsOverlay(){
+ const svg=$('svg');
+ if(!svg || !last || !last.A) return;
+ const baseX=95, baseY=520, scale=42, levelH=48;
+ const sys=$('sistema').value;
+ const accessSide=safeVal('accesoLado','A');
+ const accessMod=Math.max(1,safeInt('accesoModulo',1)||1);
+ const barColor='#111111';
+ const mensColor='#f5c400';
+ const blue='#1475ff';
+ const rodColor=sys==='ulma'?'#f5c400':'#c40000';
+ const add=(s)=>svg.insertAdjacentHTML('beforeend',s);
+ const L=(x1,y1,x2,y2,c=barColor,w=4,d='')=>add(`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="${w}" stroke-linecap="round" ${d}/>`);
+ const R=(x,y,w,h,fill='none',c='#111',sw=2,d='')=>add(`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${fill}" stroke="${c}" stroke-width="${sw}" ${d}/>`);
+ const T=(x,y,t,size=12,c='#111')=>add(`<text x="${x}" y="${y}" font-size="${size}" fill="${c}" font-weight="bold" text-anchor="middle">${t}</text>`);
+ add(`<g id="visible-details-overlay">`);
+ add(`<text x="30" y="75" font-size="13" fill="#111" font-weight="bold">DETALLES VISIBLES: doble barra/barandilla, diagonales, acceso y ménsulas</text>`);
+ function run(mods,label,orient,x0,y0){
+   let pos=0;
+   mods.forEach((m,i)=>{
+     const len=m*scale;
+     const isAccess=(label===accessSide && (i+1)===accessMod);
+     if(orient==='H'){
+       const x=x0+pos, yTop=y0-last.levels*levelH, w=len, h=last.levels*levelH;
+       // strong module outline
+       R(x,yTop,w,h,'none',isAccess?blue:'#111',isAccess?4:2);
+       const isPaso=isMarcoPasoVisible(label,i,mods.length);
+       if(isPaso){
+         R(x+5,yTop+last.levels*levelH-levelH+6,w-10,levelH-12,'rgba(245,196,0,0.22)','#f5a400',4,'stroke-dasharray="8 4"');
+         T(x+w/2,yTop+last.levels*levelH-levelH/2,'MARCO PASO',12,'#9a6500');
+         T(x+w/2,yTop+last.levels*levelH-8,marcoPasoLabel(),9,'#9a6500');
+       }
+       for(let j=0;j<last.levels;j++){
+         const yy=y0-(j+1)*levelH;
+         // two bars per level, always on top
+         L(x+2, yy+levelH*0.34, x+w-2, yy+levelH*0.34, barColor, 3.5);
+         if(j>0) L(x+2, yy+levelH*0.64, x+w-2, yy+levelH*0.64, barColor, 3.5);
+         // rodapie clear
+         L(x+2, yy+levelH-5, x+w-2, yy+levelH-5, rodColor, 5);
+         // diagonals: access always, else alternate
+         
+         // access platform/stair, on top
+         if(isAccess){
+           R(x+w*0.15, yy+6, w*0.70, levelH-12, 'rgba(20,117,255,0.10)', blue, 3);
+           L(x+w*0.18, yy+levelH-10, x+w*0.82, yy+10, blue, 4);
+           // stair steps
+           for(let s=0;s<5;s++){
+             let sx=x+w*0.25+s*w*0.10, sy=yy+levelH-12-s*7;
+             L(sx,sy,sx+w*0.16,sy,blue,1.6);
+           }
+           T(x+w/2, yy+levelH/2+4, 'ACCESO', 11, blue);
+         }
+       }
+       // module measure big
+       if(isAccess || i%3===0){ L(x+5,y0-5,x+w-5,yTop+5,isAccess?blue:'#777',4); } // DIAGONAL FULL HEIGHT V9
+       if($('medioArranque').checked){ R(x,y0-levelH*0.5,w,levelH*0.5,'rgba(245,196,0,0.10)','#9a6500',2,'stroke-dasharray="5 4"'); L(x+3,y0-levelH*0.25,x+w-3,y0-levelH*0.25,'#9a6500',3); T(x+w/2,y0-levelH*0.12,'MEDIO 1m',9,'#9a6500'); }
+       T(x+w/2,y0+25,`${label}${i+1} · ${m.toFixed(2)} m`,12,'#111');
+       // mensulas top overlay
+       const ms=mensulas.filter(mm=>mm.lado===label && (String(mm.modulo).toLowerCase()==='todo' || parseInt(mm.modulo)===(i+1)));
+       ms.forEach(mm=>{
+         let levels=mm.niveles==='superior'?[last.levels]:[...Array(last.levels).keys()].map(v=>v+1);
+         if(mm.niveles==='manual') levels=[last.levels];
+         levels.forEach(j=>{
+           const cy=y0-(j-.5)*levelH;
+           const out=Math.max(24,mm.medida*48);
+           // real-ish bracket: horizontal arm, diagonal brace, end plate
+           L(x+w,cy,x+w+out,cy,mensColor,8);
+           L(x+w,cy+22,x+w+out,cy,mensColor,4);
+           R(x+w+out-7,cy-10,14,20,mensColor,'#9a6500',2);
+           add(`<circle cx="${x+w}" cy="${cy}" r="5" fill="#9a6500"/>`);
+           T(x+w+out/2,cy-12,`M ${mm.medida.toFixed(2)}`,10,'#9a6500');
+         });
+       });
+     } else {
+       const x=x0, y=y0-pos-len, w=50, h=len;
+       R(x,y,w,h,'none','#111',2);
+       const isPaso=isMarcoPasoVisible(label,i,mods.length);
+       if(isPaso){
+         R(x+3,y+5,w-6,h-10,'rgba(245,196,0,0.22)','#f5a400',4,'stroke-dasharray="8 4"');
+         T(x+25,y+h/2-8,'PASO',11,'#9a6500');
+         T(x+25,y+h/2+8,marcoPasoLabel(),8,'#9a6500');
+       }
+       // side B bars shown vertical/side representation
+       L(x+16,y+4,x+16,y+h-4,barColor,3.5);
+       L(x+34,y+4,x+34,y+h-4,barColor,3.5);
+       if(i%3===0) L(x+4,y+h-4,x+w-4,y+4,'#777',3);
+       if(isAccess){
+         R(x+5,y+h*0.15,40,h*0.70,'rgba(20,117,255,0.10)',blue,3);
+         L(x+8,y+h*0.85,x+42,y+h*0.15,blue,4);
+         T(x+25,y+h/2,'ACC',10,blue);
+       }
+       T(x+86,y+h/2,`${label}${i+1} ${m.toFixed(2)}m`,11,'#111');
+       const ms=mensulas.filter(mm=>mm.lado===label && (String(mm.modulo).toLowerCase()==='todo' || parseInt(mm.modulo)===(i+1)));
+       ms.forEach(mm=>{
+         const cy=y+h/2, out=Math.max(24,mm.medida*48);
+         L(x+w,cy,x+w+out,cy,mensColor,8);
+         L(x+w,cy+22,x+w+out,cy,mensColor,4);
+         R(x+w+out-7,cy-10,14,20,mensColor,'#9a6500',2);
+         T(x+w+out/2,cy-12,`M ${mm.medida.toFixed(2)}`,10,'#9a6500');
+       });
+     }
+     pos+=len;
+   });
+ }
+ run(last.A,'A','H',baseX,baseY);
+ if($('esquinaL').checked && last.B && last.B.length) run(last.B,'B','V',baseX-68,baseY);
+ add(`</g>`);
+}
+
+let rx=-.45, ry=.65, drag=false, lastP=null;function draw3D(){ viewMode='3d'; setupViewportGestures(); $('svg').style.display='none';$('canvasReal').style.display='none';$('canvas3d').style.display='block'; applyView(); render3D(false)}function drawRealista(){ viewMode='real'; setupViewportGestures(); $('svg').style.display='none';$('canvas3d').style.display='none';$('canvasReal').style.display='block'; applyView(); render3D(true)}function render3D(real=false){let c=real?$('canvasReal'):$('canvas3d'), ctx=c.getContext('2d'), W=c.width,H=c.height; ctx.clearRect(0,0,W,H); ctx.fillStyle=real?'#eaf3ff':'#fff'; ctx.fillRect(0,0,W,H);let scale=30, base=[180,530], sys=$('sistema').value, d=num('anchoAndamio')||.7;function P(x,y,z){let cy=Math.cos(ry),sy=Math.sin(ry),cx=Math.cos(rx),sx=Math.sin(rx);let x1=x*cy+z*sy,z1=-x*sy+z*cy,y1=y*cx-z1*sx;let sc=25/(1+(y*sx+z1*cx)/50);return [base[0]+x1*sc,base[1]-y1*sc]}function L(a,b,col='#222',w=real?4:2){let A=P(...a),B=P(...b);ctx.beginPath();ctx.moveTo(A[0],A[1]);ctx.lineTo(B[0],B[1]);ctx.strokeStyle=col;ctx.lineWidth=w;ctx.lineCap='round';ctx.stroke()}function run(mods,dir=[1,0],off=[0,0],label='A'){let pos=0; let xs=[0]; mods.forEach(m=>{pos+=m;xs.push(pos)}); for(let i=0;i<xs.length;i++)for(let z of [0,d])L([off[0]+dir[0]*xs[i],0,off[1]+dir[1]*xs[i]+z],[off[0]+dir[0]*xs[i],last.levels*2,off[1]+dir[1]*xs[i]+z]); for(let j=0;j<=last.levels;j++)for(let i=0;i<mods.length;i++){let a=xs[i],b=xs[i+1],y=j*2;L([off[0]+dir[0]*a,y,off[1]+dir[1]*a],[off[0]+dir[0]*b,y,off[1]+dir[1]*b]);L([off[0]+dir[0]*a,y,off[1]+dir[1]*a+d],[off[0]+dir[0]*b,y,off[1]+dir[1]*b+d],'#555',2); if(j>0){L([off[0]+dir[0]*a,y-.1,off[1]+dir[1]*a],[off[0]+dir[0]*b,y-.1,off[1]+dir[1]*b],sys==='ulma'?'#f5c400':'#c40000',4); L([off[0]+dir[0]*a,y-1.2,off[1]+dir[1]*a],[off[0]+dir[0]*b,y-1.2,off[1]+dir[1]*b],'#111',2); L([off[0]+dir[0]*a,y-.7,off[1]+dir[1]*a],[off[0]+dir[0]*b,y-.7,off[1]+dir[1]*b],'#111',2); if(i%3===0||i+1==safeInt('accesoModulo',1))L([off[0]+dir[0]*a,y-2,off[1]+dir[1]*a],[off[0]+dir[0]*b,y,off[1]+dir[1]*b],i+1==safeInt('accesoModulo',1)?'#1475ff':'#777',3); if(i+1==safeInt('accesoModulo',1)){L([off[0]+dir[0]*(a+b)/2,y-2,off[1]+dir[1]*(a+b)/2],[off[0]+dir[0]*(a+b)/2,y,off[1]+dir[1]*(a+b)/2+d],'#1475ff',4)}}} mensulas.filter(m=>m.lado===label).forEach(mm=>{let idx=mm.modulo.toLowerCase()==='todo'?0:Math.max(0,parseInt(mm.modulo)-1), start=xs[idx]||0,end=mm.modulo.toLowerCase()==='todo'?xs[xs.length-1]:(xs[idx+1]||start+1), mid=(start+end)/2; let levs=mm.niveles==='superior'?[last.levels]:[...Array(last.levels).keys()].map(v=>v+1); if(mm.niveles==='manual')levs=[last.levels]; levs.forEach(j=>{let y=j*2-1; L([off[0]+dir[0]*mid,y,off[1]+dir[1]*mid+d],[off[0]+dir[0]*mid,y,off[1]+dir[1]*mid+d+mm.medida],'#f5c400',real?10:7); L([off[0]+dir[0]*mid,y-1,off[1]+dir[1]*mid+d],[off[0]+dir[0]*mid,y,off[1]+dir[1]*mid+d+mm.medida],'#b88700',real?6:4)})})}ctx.fillStyle='#111';ctx.font='16px Arial';ctx.fillText(real?'Vista realista orientativa':'Vista 3D girable',30,30);run(last.A,[1,0],[0,0],'A'); if($('esquinaL').checked&&last.B.length)run(last.B,[0,-1],[0,0],'B'); if($('doble').checked)run(last.A,[1,0],[0,d+.75],'A'); if($('torreCarga').checked&&sys==='ulma'){ctx.fillStyle='#9a6500';ctx.fillText('Torre carga',740,60)}}function pos(e){let t=e.touches?e.touches[0]:e;return{x:t.clientX,y:t.clientY}}
+function renderPedido(){
+ const rows=unifiedDespieceRows();
+ let obra=$('obraNombre').value||'Sin obra', cliente=$('cliente').value||'', sistema=$('sistema').value==='ulma'?'Multidireccional ULMA':'Andamio europeo';
+ let html=`<div style="display:flex;align-items:center;gap:14px;margin-bottom:12px"><img src="icons/logo.png" style="height:72px"><div><h2 style="margin:0">Hoja de pedido profesional</h2><p style="margin:4px 0;color:#555"><b>Obra:</b> ${obra} · <b>Cliente:</b> ${cliente} · <b>Sistema:</b> ${sistema}</p></div></div>`;
+ html+='<table class="proTable"><tr><th>Grupo / pieza</th><th>Cantidad</th><th>Revisado</th></tr>';
+ rows.forEach(r=>{
+   if(r.cat) html+=`<tr class="catRow"><td colspan="3">${r.cat}</td></tr>`;
+   else html+=`<tr><td>${r.pieza}</td><td>${r.cantidad}</td><td>☐</td></tr>`;
+ });
+ html+='</table><p class="note">Pedido orientativo generado desde el plan de montaje. Revisar siempre antes de cargar o pedir material.</p>';
+ $('pedidoBox').innerHTML=html;
+}
+function downloadCSV(){
+ const rows=[['KAYN ANDAMIOS - Hoja de pedido profesional'],['Obra',$('obraNombre').value||'Sin obra'],['Cliente',$('cliente').value||''],['Sistema',$('sistema').value==='ulma'?'Multidireccional ULMA':'Europeo'],[],['Grupo/Pieza','Cantidad','Revisado']];
+ unifiedDespieceRows().forEach(r=>{
+   if(r.cat) rows.push([r.cat,'','']);
+   else rows.push([r.pieza,r.cantidad,'']);
+ });
+ let csv=rows.map(r=>r.map(c=>`"${String(c).replaceAll('"','""')}"`).join(';')).join('\n');
+ let a=document.createElement('a');
+ a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
+ a.download='pedido-profesional-kayn-'+(($('obraNombre').value||'obra').replaceAll(' ','-'))+'.csv';
+ a.click();
+}
+
+
+function exportPedidoExcel(){
+ const rows=[['KAYN ANDAMIOS - Hoja de pedido profesional'],['Obra',$('obraNombre').value||'Sin obra'],['Cliente',$('cliente').value||''],['Sistema',$('sistema').value==='ulma'?'Multidireccional ULMA':'Europeo'],[],['Grupo/Pieza','Cantidad','Revisado']];
+ unifiedDespieceRows().forEach(r=>{ if(r.cat) rows.push([r.cat,'','']); else rows.push([r.pieza,r.cantidad,'']); });
+ let content='<html><head><meta charset="UTF-8"></head><body><table border="1">';
+ rows.forEach(r=>{content+='<tr>'+r.map(c=>'<td>'+String(c).replaceAll('&','&amp;').replaceAll('<','&lt;')+'</td>').join('')+'</tr>';});
+ content+='</table></body></html>';
+ let a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([content],{type:'application/vnd.ms-excel;charset=utf-8'})); a.download='pedido-kayn-'+(($('obraNombre').value||'obra').replaceAll(' ','-'))+'.xls'; a.click();
+}
+function printPedido(){
+ renderPedido();
+ let w=window.open('', '_blank');
+ w.document.write('<html><head><title>Pedido KAYN</title></head><body style="font-family:Arial;padding:20px">'+$('pedidoBox').innerHTML+'</body></html>');
+ w.document.close(); w.focus(); w.print();
+}
+
+function downloadSVG(){let a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([$('svg').outerHTML],{type:'image/svg+xml'})); a.download='plano-kayn.svg'; a.click()}function reportText(){return `KAYN ANDAMIOS\nObra: ${$('obraNombre').value||''}\nCliente: ${$('cliente').value||''}\nSistema: ${$('sistema').value}\nSuperficie: ${last.area.toFixed(2)} m²\nMódulos: ${last.modCount}\nNiveles: ${last.levels}\nObservaciones:\n${$('obs').value||''}\n\nPlano: primer nivel solo con barras exteriores; diagonales completas por paño y separadas por medida; acceso con plataforma de escalera; medidas de módulos y marcos de paso marcados.\n\nNota: medición orientativa. Revisar montaje según normativa, fabricante, terreno, cargas y técnico competente.`}function renderReport(){renderBreakdown();$('report').innerHTML=`<div style="display:flex;gap:12px;align-items:center"><img src="icons/logo.png" style="height:70px"><div><h2>KAYN ANDAMIOS</h2><p>Informe de montaje</p></div></div><pre style="white-space:pre-wrap;font-family:Arial">${reportText()}</pre><h3>Despiece</h3>${$('despieceBox').innerHTML}<h3>Fotos</h3><div class="photos">${photos.map(p=>`<img src="${p}">`).join('')}</div>`}function printPDF(){renderReport();window.print()}function copyReport(){navigator.clipboard.writeText(reportText()).then(()=>alert('Informe copiado'))}function addPhotos(e){[...e.target.files].forEach(f=>{let r=new FileReader();r.onload=ev=>{photos.push(ev.target.result);renderPhotos()};r.readAsDataURL(f)});e.target.value=''}function renderPhotos(){$('photos').innerHTML=photos.map(p=>`<img src="${p}">`).join('')}
+let counterImage=null, counterLastCount=0;
+function loadCounterPhoto(e){
+ const file=e.target.files && e.target.files[0];
+ if(!file)return;
+ const img=new Image();
+ img.onload=()=>{
+   counterImage=img;
+   const c=$('counterCanvas'), ctx=c.getContext('2d');
+   const ratio=Math.min(c.width/img.width,c.height/img.height);
+   const w=img.width*ratio,h=img.height*ratio;
+   ctx.clearRect(0,0,c.width,c.height);
+   ctx.drawImage(img,0,0,w,h);
+   $('counterResult').textContent='Foto cargada. Pulsa “Contar automáticamente”.';
+ };
+ img.src=URL.createObjectURL(file);
+}
+function runPhotoCounter(){
+ if(!counterImage){alert('Primero sube una foto para contar.');return;}
+ const c=$('counterCanvas'), ctx=c.getContext('2d');
+ const ratio=Math.min(c.width/counterImage.width,c.height/counterImage.height);
+ const w=Math.floor(counterImage.width*ratio), h=Math.floor(counterImage.height*ratio);
+ ctx.clearRect(0,0,c.width,c.height); ctx.drawImage(counterImage,0,0,w,h);
+ const img=ctx.getImageData(0,0,w,h), data=img.data;
+ const sens=safeInt('counterSensitivity',38), minSize=safeInt('counterMinSize',85);
+ let mask=new Uint8Array(w*h);
+ for(let y=1;y<h-1;y++){
+   for(let x=1;x<w-1;x++){
+     let i=(y*w+x)*4, g=(data[i]+data[i+1]+data[i+2])/3;
+     let i2=(y*w+x+1)*4, i3=((y+1)*w+x)*4;
+     let gx=Math.abs(g-(data[i2]+data[i2+1]+data[i2+2])/3);
+     let gy=Math.abs(g-(data[i3]+data[i3+1]+data[i3+2])/3);
+     if(gx+gy>sens) mask[y*w+x]=1;
+   }
+ }
+ let seen=new Uint8Array(w*h), boxes=[], q=[];
+ for(let y=0;y<h;y+=2){
+   for(let x=0;x<w;x+=2){
+     let idx=y*w+x; if(!mask[idx]||seen[idx])continue;
+     let minx=x,maxx=x,miny=y,maxy=y,count=0; q=[idx]; seen[idx]=1;
+     while(q.length){
+       let p=q.pop(), cx=p%w, cy=Math.floor(p/w); count++;
+       if(cx<minx)minx=cx;if(cx>maxx)maxx=cx;if(cy<miny)miny=cy;if(cy>maxy)maxy=cy;
+       for(let dy=-2;dy<=2;dy+=2)for(let dx=-2;dx<=2;dx+=2){
+         if(!dx&&!dy)continue; let nx=cx+dx,ny=cy+dy; if(nx<0||ny<0||nx>=w||ny>=h)continue;
+         let ni=ny*w+nx; if(mask[ni]&&!seen[ni]){seen[ni]=1;q.push(ni);}
+       }
+     }
+     let bw=maxx-minx,bh=maxy-miny, area=bw*bh;
+     if(area>minSize && Math.max(bw,bh)>18 && count>12) boxes.push({minx,miny,bw,bh,area});
+   }
+ }
+ boxes.sort((a,b)=>b.area-a.area);
+ let filtered=[];
+ boxes.forEach(b=>{
+   let overlap=filtered.some(f=>!(b.minx>f.minx+f.bw||b.minx+b.bw<f.minx||b.miny>f.miny+f.bh||b.miny+b.bh<f.miny));
+   if(!overlap)filtered.push(b);
+ });
+ counterLastCount=filtered.length;
+ ctx.lineWidth=3; ctx.strokeStyle='#f5c400'; ctx.fillStyle='rgba(245,196,0,.18)'; ctx.font='16px Arial';
+ filtered.forEach((b,i)=>{ctx.fillRect(b.minx,b.miny,b.bw,b.bh);ctx.strokeRect(b.minx,b.miny,b.bw,b.bh);ctx.fillStyle='#111';ctx.fillText(String(i+1),b.minx+4,b.miny+18);ctx.fillStyle='rgba(245,196,0,.18)'});
+ $('counterResult').textContent='Resultado: '+counterLastCount+' piezas detectadas ('+safeVal('counterPiece','pieza')+'). Revisa visualmente antes de añadir.';
+}
+function addCounterToDespiece(){
+ if(!counterLastCount){alert('Primero cuenta una foto.');return;}
+ const k='Foto - '+safeVal('counterPiece','Pieza');
+ countedPhotoPieces[k]=(countedPhotoPieces[k]||0)+counterLastCount;
+ renderBreakdown(); renderPedido(); renderReport();
+ alert('Añadido al despiece: '+k+' x '+counterLastCount);
+}
+
+
+const stockMeasureMap={
+ "Plataforma escalera":["1.00 m","1.50 m","2.00 m","2.50 m","3.00 m"],
+ "Plataforma normal":["0.70 m","1.00 m","1.50 m","2.00 m","2.50 m","3.00 m"],
+ "Rodapié":["0.73 m","1.00 m","1.50 m","2.00 m","2.50 m","3.00 m"],
+ "Barra / larguero":["0.73 m","1.00 m","1.50 m","2.00 m","2.50 m","3.00 m"],
+ "Medio marco":["1.00 m"],
+ "Marco europeo":["0.73 x 2.00 m","1.00 x 2.00 m"],
+ "Diagonal":["2.00 m","2.50 m","3.00 m"],
+ "Husillo":["unificado"],
+ "Vertical ULMA":["0.50 m","1.00 m","1.50 m","2.00 m","3.00 m"],
+ "Horizontal ULMA":["0.73 m","1.00 m","1.50 m","2.00 m","2.50 m","3.00 m"],
+ "Ménsula":["0.30 m","0.50 m","0.70 m","1.00 m","1.50 m","2.00 m","2.50 m","3.00 m"]
+};
+let stockImage=null, stockDetected=0;
+function updateStockMeasures(){
+ const mat=safeVal('stockMaterial','Plataforma escalera');
+ const sel=$('stockMedida'); if(!sel)return;
+ sel.innerHTML=(stockMeasureMap[mat]||["manual"]).map(m=>`<option value="${m}">${m}</option>`).join('');
+ const tip=$('stockTip');
+ if(tip){
+   let msg='Conteo asistido: la app propone, tú corriges.';
+   if(mat==='Rodapié') msg='Rodapiés: ignora plataformas u objetos laterales que aparezcan en la foto.';
+   if(mat==='Plataforma normal') msg='Plataformas normales: no mezclar con plataformas de escalera; si hay 3 de escalera, cuéntalas aparte.';
+   if(mat==='Plataforma escalera') msg='Plataformas de escalera: contar solo las de trampilla/escalera.';
+   if(mat==='Barra / larguero' || mat==='Diagonal') msg='Barras/diagonales: mejor contar asistido por puntas visibles y corregir con +/−.';
+   tip.textContent=msg;
+ }
+}
+function stockAdjust(delta){
+ const inp=$('stockCantidad'); if(!inp)return;
+ let v=Math.max(0,(parseInt(inp.value||0)||0)+delta);
+ inp.value=v; const q=$('stockQtyView'); if(q)q.textContent=v;
+}
+function loadStockPhoto(e){
+ const file=e.target.files && e.target.files[0]; if(!file)return;
+ const img=new Image();
+ img.onload=()=>{
+   stockImage=img;
+   const c=$('stockCanvas'), ctx=c.getContext('2d');
+   const ratio=Math.min(c.width/img.width,c.height/img.height);
+   const w=img.width*ratio,h=img.height*ratio;
+   ctx.clearRect(0,0,c.width,c.height); ctx.drawImage(img,0,0,w,h);
+   // reuse a simplified assisted estimator by material
+   let estimated=estimateStockByMaterial(ctx,w,h,safeVal('stockMaterial',''));
+   stockDetected=estimated;
+   $('stockCantidad').value=estimated; $('stockQtyView').textContent=estimated;
+ };
+ img.src=URL.createObjectURL(file);
+}
+function estimateStockByMaterial(ctx,w,h,mat){
+ const img=ctx.getImageData(0,0,w,h), data=img.data;
+ let sens= mat.includes('Barra')||mat.includes('Diagonal') ? 30 : 38;
+ let minSize= mat.includes('Husillo') ? 45 : (mat.includes('Marco')?140:85);
+ let mask=new Uint8Array(w*h);
+ for(let y=1;y<h-1;y++){
+  for(let x=1;x<w-1;x++){
+    let i=(y*w+x)*4,g=(data[i]+data[i+1]+data[i+2])/3;
+    let i2=(y*w+x+1)*4,i3=((y+1)*w+x)*4;
+    let gx=Math.abs(g-(data[i2]+data[i2+1]+data[i2+2])/3), gy=Math.abs(g-(data[i3]+data[i3+1]+data[i3+2])/3);
+    if(gx+gy>sens)mask[y*w+x]=1;
+  }
+ }
+ let seen=new Uint8Array(w*h), boxes=[], q=[];
+ for(let y=0;y<h;y+=2){for(let x=0;x<w;x+=2){
+   let idx=y*w+x;if(!mask[idx]||seen[idx])continue;
+   let minx=x,maxx=x,miny=y,maxy=y,count=0;q=[idx];seen[idx]=1;
+   while(q.length){let p=q.pop(),cx=p%w,cy=Math.floor(p/w);count++;minx=Math.min(minx,cx);maxx=Math.max(maxx,cx);miny=Math.min(miny,cy);maxy=Math.max(maxy,cy);
+    for(let dy=-2;dy<=2;dy+=2)for(let dx=-2;dx<=2;dx+=2){if(!dx&&!dy)continue;let nx=cx+dx,ny=cy+dy;if(nx<0||ny<0||nx>=w||ny>=h)continue;let ni=ny*w+nx;if(mask[ni]&&!seen[ni]){seen[ni]=1;q.push(ni);}}
+   }
+   let bw=maxx-minx,bh=maxy-miny,area=bw*bh;
+   if(area>minSize && Math.max(bw,bh)>18 && count>12)boxes.push({minx,miny,bw,bh,area});
+ }}
+ boxes.sort((a,b)=>b.area-a.area);
+ let filtered=[];
+ boxes.forEach(b=>{let overlap=filtered.some(f=>!(b.minx>f.minx+f.bw||b.minx+b.bw<f.minx||b.miny>f.miny+f.bh||b.miny+b.bh<f.miny));if(!overlap)filtered.push(b);});
+ // Material adjustments: these are only starting guesses; user corrects.
+ let count=filtered.length;
+ if(mat==='Plataforma escalera') count=Math.max(0,Math.round(count*0.9));
+ if(mat==='Rodapié') count=Math.max(0,Math.round(count*0.75));
+ if(mat==='Barra / larguero' || mat==='Diagonal') count=Math.max(0,Math.round(count*1.15));
+ ctx.lineWidth=3; ctx.strokeStyle='#f5c400'; ctx.fillStyle='rgba(245,196,0,.18)'; ctx.font='16px Arial';
+ filtered.forEach((b,i)=>{ctx.fillRect(b.minx,b.miny,b.bw,b.bh);ctx.strokeRect(b.minx,b.miny,b.bw,b.bh);ctx.fillStyle='#111';ctx.fillText(String(i+1),b.minx+4,b.miny+18);ctx.fillStyle='rgba(245,196,0,.18)'});
+ return count;
+}
+function saveStockItem(){
+ const item={sistema:safeVal('stockSistema','Europeo'), material:safeVal('stockMaterial',''), medida:safeVal('stockMedida',''), cantidad:safeInt('stockCantidad',0), ubicacion:safeVal('stockUbicacion',''), nota:safeVal('stockNota','')};
+ if(!item.cantidad){alert('Pon cantidad antes de guardar.');return;}
+ stockItems.push(item); renderStockTable();
+}
+function renderStockTable(){
+ let grouped={};
+ stockItems.forEach(it=>{let k=`${it.sistema} | ${it.material} | ${it.medida}`;grouped[k]=(grouped[k]||0)+Number(it.cantidad||0);});
+ let html='<table class="proTable"><tr><th>Sistema</th><th>Material</th><th>Medida</th><th>Cantidad</th></tr>';
+ Object.entries(grouped).forEach(([k,v])=>{let p=k.split(' | ');html+=`<tr><td>${p[0]}</td><td>${p[1]}</td><td>${p[2]}</td><td>${v}</td></tr>`;});
+ html+='</table>';
+ $('stockTable').innerHTML=html;
+}
+function exportStockCSV(){
+ let rows=[['KAYN ANDAMIOS - Inventario asistido'],['Sistema','Material','Medida','Cantidad','Ubicación','Nota']];
+ stockItems.forEach(i=>rows.push([i.sistema,i.material,i.medida,i.cantidad,i.ubicacion,i.nota]));
+ let csv=rows.map(r=>r.map(c=>`"${String(c).replaceAll('"','""')}"`).join(';')).join('\n');
+ let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='inventario-kayn.csv';a.click();
+}
+function addStockToDespiece(){
+ stockItems.forEach(i=>{let k=`Stock ${i.sistema} - ${i.material} ${i.medida}`; countedPhotoPieces[k]=(countedPhotoPieces[k]||0)+Number(i.cantidad||0);});
+ renderBreakdown(); renderPedido(); alert('Inventario añadido como líneas al despiece/pedido.');
+}
+
+function fields(){return ['obraNombre','cliente','direccion','sistema','largoA','largoB','alto','anchoAndamio','altoNivel','precio','esquinaL','doble','torreCarga','medioArranque','malla','rodapies','barrasInterior','cierresLaterales','marcosPaso','marcosPasoLado','marcosPasoInicio','marcosPasoCant','alturaLibreNecesaria','alturaHusillo','verticalMode','v050','v100','v150','v200','v300','huecoEsquina','accesoLado','accesoModulo','tipoAcceso','amarresManual','abrazGiratorias','abrazFijasExtra','tubo050','tubo100','puentesBarandilla','niveladores','adaptadoresExtra','obs']}function collect(){let o={};fields().forEach(id=>{let el=$(id);o[id]=el.type==='checkbox'?el.checked:el.value});return {id:currentId||Date.now().toString(),data:o,mensulas,photos,countedPhotoPieces,stockItems}}function apply(w){currentId=w.id;Object.entries(w.data).forEach(([id,v])=>{let el=$(id);if(el){if(el.type==='checkbox')el.checked=v;else el.value=v}});mensulas=w.mensulas||[];photos=w.photos||[];countedPhotoPieces=w.countedPhotoPieces||{};stockItems=w.stockItems||[];calc();renderPhotos();renderStockTable()}function saveWork(){let arr=JSON.parse(localStorage.kaynWorks||'[]'), w=collect(), i=arr.findIndex(x=>x.id===w.id); if(i>=0)arr[i]=w; else arr.unshift(w); currentId=w.id; localStorage.kaynWorks=JSON.stringify(arr); renderSaved(); alert('Obra guardada')}function renderSaved(){let arr=JSON.parse(localStorage.kaynWorks||'[]'); $('saved').innerHTML='<table><tr><th>Obra</th><th>Cliente</th><th></th></tr>'+arr.map(w=>`<tr><td>${w.data.obraNombre||'Sin nombre'}</td><td>${w.data.cliente||''}</td><td><button class="light" onclick="apply(JSON.parse(localStorage.kaynWorks).find(x=>x.id==='${w.id}'))">Abrir</button></td></tr>`).join('')+'</table>'}function newWork(){currentId=null;mensulas=[];photos=[];countedPhotoPieces={};stockItems=[];fields().forEach(id=>{let el=$(id);if(el&&el.type!=='checkbox'&&!['largoA','alto','anchoAndamio','altoNivel'].includes(id))el.value=''});calc()}setupViewportGestures();updateStockMeasures();try{calc();}catch(e){console.error(e)}renderSaved();renderStockTable();applyView();
+</script></body></html>
