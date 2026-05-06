@@ -1,12 +1,12 @@
 {
   "name": "KAYN ANDAMIOS PRO",
   "short_name": "KAYN",
-  "description": "Aplicación PRO para montaje, despiece, pedidos y contabilidad de andamios.",
+  "description": "Aplicación profesional para montaje, despiece, pedido y control de andamios.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#111111",
+  "background_color": "#0a0a0a",
   "theme_color": "#f5c400",
   "icons": [
     {

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kayn-andamios-v11-2-ia-module';
+const CACHE_NAME = 'kayn-andamios-v11-2-ui-pro-logo';
 const ASSETS = [
   "/",
   "/index.html",
@@ -40,5 +40,3 @@ self.addEventListener('fetch', event => {
     })
   );
 });
-
-// KAYN IA module added: /contabilidad-ia.html
