@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KAYN Contabilidad IA</title>
+<style>
+body{margin:0;font-family:Arial;background:#f2f2f2;color:#111}
+header{background:#050505;color:#f5c400;padding:14px;position:sticky;top:0;z-index:5}
+h1{font-size:22px;margin:0}.sub{color:#ddd;font-size:12px;margin-top:4px}
+main{padding:12px;max-width:980px;margin:auto}
+.card{background:#fff;border:1px solid #e5e5e5;border-radius:20px;padding:14px;margin-bottom:12px;box-shadow:0 6px 22px #0001}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+label{display:block;font-size:12px;color:#555;margin-bottom:4px}
+input,select,button{width:100%;padding:12px;border-radius:14px;border:1px solid #ccc;font-size:16px}
+button{background:#111;color:#fff;border:0;font-weight:bold}.yellow{background:#f5c400;color:#000}.light{background:#eee;color:#111}
+.row{display:flex;gap:8px;flex-wrap:wrap}.row button{width:auto}
+canvas{width:100%;background:#fff;border:1px solid #ddd;border-radius:18px}
+.result{font-size:28px;font-weight:900;text-align:center;background:#fff5cf;border:2px solid #f5c400;border-radius:18px;padding:12px}
+.note{font-size:12px;color:#666}.warn{background:#fff2d6;border:1px solid #ffd37a;color:#8a5a00;border-radius:14px;padding:10px}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{border-bottom:1px solid #eee;padding:8px;text-align:left}th{background:#111;color:#f5c400}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.row button{width:100%}}
+</style>
+</head>
+<body>
+<header><h1>KAYN ANDAMIOS · Contabilidad IA</h1><div class="sub">Módulo independiente para Vercel, sin tocar la app principal</div></header>
+<main>
+<div class="card warn"><b>Uso recomendado:</b> foto frontal, paquete aislado, buena luz. Ajusta el recuadro amarillo para que solo cubra el material.</div>
+<div class="card">
+<h2>Material</h2>
+<div class="grid">
+<div><label>Sistema</label><select id="sistema"><option>Europeo</option><option>ULMA</option></select></div>
+<div><label>Material</label><select id="material" onchange="setMeasures()">
+<option>Plataforma escalera</option><option>Plataforma normal</option><option>Rodapié</option><option>Barra / larguero</option><option>Diagonal</option><option>Medio marco</option><option>Marco europeo</option><option>Husillo</option><option>Vertical ULMA</option><option>Horizontal ULMA</option><option>Ménsula</option>
+</select></div>
+<div><label>Medida</label><select id="medida"></select></div>
+</div><br>
+<input type="file" accept="image/*" id="file" onchange="loadPhoto(event)">
+</div>
+<div class="card">
+<h2>Zona de conteo</h2>
+<div class="grid">
+<div><label>Izquierda</label><input id="rx" type="range" min="0" max="80" value="4" oninput="draw()"></div>
+<div><label>Arriba</label><input id="ry" type="range" min="0" max="80" value="4" oninput="draw()"></div>
+<div><label>Ancho</label><input id="rw" type="range" min="20" max="100" value="92" oninput="draw()"></div>
+<div><label>Alto</label><input id="rh" type="range" min="20" max="100" value="92" oninput="draw()"></div>
+<div><label>Sensibilidad</label><input id="sens" type="range" min="10" max="95" value="42"></div>
+<div><label>Separación</label><input id="sep" type="range" min="5" max="130" value="35"></div>
+</div>
+</div>
+<div class="card">
+<h2>Conteo</h2>
+<div class="row">
+<button class="yellow" onclick="countIA()">Contar IA</button>
+<button class="light" onclick="adjust(1)">+1</button>
+<button class="light" onclick="adjust(-1)">−1</button>
+<button class="light" onclick="resetCount()">Reiniciar</button>
+<button class="yellow" onclick="saveItem()">Guardar</button>
+</div><br>
+<div id="res" class="result">0 piezas</div>
+<p id="msg" class="note">Sube una foto para empezar.</p>
+<canvas id="cv" width="1000" height="650"></canvas>
+</div>
+<div class="card">
+<h2>Inventario IA</h2>
+<div class="row"><button class="light" onclick="exportCSV()">Exportar CSV</button><button class="light" onclick="clearInv()">Borrar</button><a href="./index.html" style="font-weight:bold;color:#111;align-self:center">Volver a app principal</a></div>
+<div id="table"></div>
+</div>
+</main>
+<script>
+const measures={"Plataforma escalera":["1.00 m","1.50 m","2.00 m","2.50 m","3.00 m"],"Plataforma normal":["0.70 m","1.00 m","1.50 m","2.00 m","2.50 m","3.00 m"],"Rodapié":["0.73 m","1.00 m","1.50 m","2.00 m","2.50 m","3.00 m"],"Barra / larguero":["0.73 m","1.00 m","1.50 m","2.00 m","2.50 m","3.00 m"],"Diagonal":["2.00 m","2.50 m","3.00 m"],"Medio marco":["1.00 m"],"Marco europeo":["0.73 x 2.00 m","1.00 x 2.00 m"],"Husillo":["unificado"],"Vertical ULMA":["0.50 m","1.00 m","1.50 m","2.00 m","3.00 m"],"Horizontal ULMA":["0.73 m","1.00 m","1.50 m","2.00 m","2.50 m","3.00 m"],"Ménsula":["0.30 m","0.50 m","0.70 m","1.00 m","1.50 m","2.00 m","2.50 m","3.00 m"]};
+let img=null, info=null, boxes=[], count=0, inv=JSON.parse(localStorage.kaynIAInv||"[]");
+function $(id){return document.getElementById(id)}
+function setMeasures(){let m=$("material").value;$("medida").innerHTML=(measures[m]||["manual"]).map(x=>"<option>"+x+"</option>").join("")}
+function prof(m){let p={"Plataforma escalera":[.86,180,1.05,8],"Plataforma normal":[.82,170,1.05,8],"Rodapié":[.72,55,2,25],"Barra / larguero":[1.08,35,1.45,40],"Diagonal":[1.02,35,1.45,40],"Medio marco":[.72,150,.75,12],"Marco europeo":[.70,170,.75,12],"Husillo":[.95,25,.7,18],"Vertical ULMA":[1.05,35,1.35,40],"Horizontal ULMA":[1.05,35,1.35,40]};let a=p[m]||[.85,70,1,25];return{f:a[0],min:a[1],r:a[2],max:a[3]}}
+function loadPhoto(e){let f=e.target.files&&e.target.files[0];if(!f)return;img=new Image();img.onload=()=>{let c=$("cv"),r=Math.min(c.width/img.width,c.height/img.height);info={w:img.width*r,h:img.height*r};boxes=[];count=0;msg("Foto cargada. Ajusta la zona y pulsa Contar IA.");draw();update()};img.src=URL.createObjectURL(f)}
+function roi(){let w=info?info.w:1000,h=info?info.h:650,x=w*($("rx").value/100),y=h*($("ry").value/100),rw=w*($("rw").value/100),rh=h*($("rh").value/100);if(x+rw>w)rw=w-x;if(y+rh>h)rh=h-y;return{x,y,w:rw,h:rh}}
+function draw(){let c=$("cv"),ctx=c.getContext("2d");ctx.clearRect(0,0,c.width,c.height);ctx.fillStyle="#fff";ctx.fillRect(0,0,c.width,c.height);if(!img){ctx.fillStyle="#555";ctx.font="18px Arial";ctx.fillText("Sube una foto para contar",30,40);return}ctx.drawImage(img,0,0,info.w,info.h);let r=roi();ctx.save();ctx.fillStyle="rgba(0,0,0,.22)";ctx.fillRect(0,0,info.w,info.h);ctx.clearRect(r.x,r.y,r.w,r.h);ctx.strokeStyle="#f5c400";ctx.lineWidth=5;ctx.setLineDash([12,8]);ctx.strokeRect(r.x,r.y,r.w,r.h);ctx.restore();boxes.forEach((b,i)=>{ctx.fillStyle="rgba(245,196,0,.18)";ctx.fillRect(b.x,b.y,b.w,b.h);ctx.strokeStyle="#f5c400";ctx.lineWidth=3;ctx.strokeRect(b.x,b.y,b.w,b.h);ctx.fillStyle="#111";ctx.font="bold 15px Arial";ctx.fillText(i+1,b.x+5,b.y+18)})}
+function bg(d,i){let r=d[i],g=d[i+1],b=d[i+2];return(g>r*1.15&&g>b*1.12)||(r>240&&g>240&&b>240)||(r<15&&g<15&&b<15)}
+function countIA(){if(!img){alert("Primero sube foto");return}let c=$("cv"),ctx=c.getContext("2d");ctx.clearRect(0,0,c.width,c.height);ctx.drawImage(img,0,0,info.w,info.h);let W=Math.ceil(info.w),H=Math.ceil(info.h),im=ctx.getImageData(0,0,W,H),d=im.data,p=prof($("material").value),r=roi(),sens=+$("sens").value,sep=+$("sep").value,mask=new Uint8Array(W*H),seen=new Uint8Array(W*H),raw=[],q=[];for(let y=Math.max(1,Math.floor(r.y));y<Math.min(H-1,Math.floor(r.y+r.h));y++)for(let x=Math.max(1,Math.floor(r.x));x<Math.min(W-1,Math.floor(r.x+r.w));x++){let i=(y*W+x)*4;if(bg(d,i))continue;let g=(d[i]+d[i+1]+d[i+2])/3,ir=(y*W+x+1)*4,id=((y+1)*W+x)*4,gr=(d[ir]+d[ir+1]+d[ir+2])/3,gd=(d[id]+d[id+1]+d[id+2])/3;if(Math.abs(g-gr)+Math.abs(g-gd)>sens)mask[y*W+x]=1}for(let y=Math.floor(r.y);y<Math.floor(r.y+r.h);y+=2)for(let x=Math.floor(r.x);x<Math.floor(r.x+r.w);x+=2){let idx=y*W+x;if(!mask[idx]||seen[idx])continue;let minx=x,maxx=x,miny=y,maxy=y,cnt=0;q=[idx];seen[idx]=1;while(q.length){let a=q.pop(),cx=a%W,cy=Math.floor(a/W);cnt++;minx=Math.min(minx,cx);maxx=Math.max(maxx,cx);miny=Math.min(miny,cy);maxy=Math.max(maxy,cy);for(let dy=-2;dy<=2;dy+=2)for(let dx=-2;dx<=2;dx+=2){let nx=cx+dx,ny=cy+dy;if(nx<r.x||ny<r.y||nx>=r.x+r.w||ny>=r.y+r.h||nx<0||ny<0||nx>=W||ny>=H)continue;let ni=ny*W+nx;if(mask[ni]&&!seen[ni]){seen[ni]=1;q.push(ni)}}}let bw=maxx-minx,bh=maxy-miny,area=bw*bh,ra=Math.max(bw,bh)/Math.max(1,Math.min(bw,bh));if(area>=p.min&&ra>=p.r&&ra<=p.max&&cnt>10)raw.push({x:minx,y:miny,w:bw,h:bh,area})}raw.sort((a,b)=>b.area-a.area);boxes=[];raw.forEach(b=>{let ov=boxes.some(f=>!(b.x>f.x+f.w+sep||b.x+b.w+sep<f.x||b.y>f.y+f.h+sep||b.y+b.h+sep<f.y));if(!ov)boxes.push(b)});count=Math.max(0,Math.round(boxes.length*p.f));msg("Conteo realizado. Valida con +/− si hace falta.");draw();update()}
+function update(){$("res").textContent=count+" piezas"}function msg(t){$("msg").textContent=t}function adjust(n){count=Math.max(0,count+n);update();msg("Ajustado manualmente.")}function resetCount(){boxes=[];count=0;draw();update();msg("Reiniciado.")}
+function saveItem(){if(!count){alert("No hay cantidad");return}inv.push({sistema:$("sistema").value,material:$("material").value,medida:$("medida").value,cantidad:count,fecha:new Date().toLocaleString()});localStorage.kaynIAInv=JSON.stringify(inv);render()}
+function render(){$("table").innerHTML="<table><tr><th>Sistema</th><th>Material</th><th>Medida</th><th>Cantidad</th><th>Fecha</th></tr>"+inv.map(i=>`<tr><td>${i.sistema}</td><td>${i.material}</td><td>${i.medida}</td><td>${i.cantidad}</td><td>${i.fecha}</td></tr>`).join("")+"</table>"}
+function exportCSV(){let rows=[["Sistema","Material","Medida","Cantidad","Fecha"],...inv.map(i=>[i.sistema,i.material,i.medida,i.cantidad,i.fecha])],csv=rows.map(r=>r.map(c=>`"${String(c).replaceAll('"','""')}"`).join(";")).join("\n"),a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="contabilidad-ia-kayn.csv";a.click()}
+function clearInv(){if(confirm("¿Borrar inventario?")){inv=[];localStorage.kaynIAInv="[]";render()}}
+setMeasures();render();draw();
+</script>
+</body>
+</html>
